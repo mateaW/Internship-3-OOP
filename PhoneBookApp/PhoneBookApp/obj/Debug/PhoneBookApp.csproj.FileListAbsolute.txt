@@ -1,0 +1,8 @@
+C:\Users\matea\Documents\DUMP_internship\Internship-3-OOP\PhoneBookApp\PhoneBookApp\bin\Debug\PhoneBookApp.exe.config
+C:\Users\matea\Documents\DUMP_internship\Internship-3-OOP\PhoneBookApp\PhoneBookApp\bin\Debug\PhoneBookApp.exe
+C:\Users\matea\Documents\DUMP_internship\Internship-3-OOP\PhoneBookApp\PhoneBookApp\bin\Debug\PhoneBookApp.pdb
+C:\Users\matea\Documents\DUMP_internship\Internship-3-OOP\PhoneBookApp\PhoneBookApp\obj\Debug\PhoneBookApp.csproj.AssemblyReference.cache
+C:\Users\matea\Documents\DUMP_internship\Internship-3-OOP\PhoneBookApp\PhoneBookApp\obj\Debug\PhoneBookApp.csproj.SuggestedBindingRedirects.cache
+C:\Users\matea\Documents\DUMP_internship\Internship-3-OOP\PhoneBookApp\PhoneBookApp\obj\Debug\PhoneBookApp.csproj.CoreCompileInputs.cache
+C:\Users\matea\Documents\DUMP_internship\Internship-3-OOP\PhoneBookApp\PhoneBookApp\obj\Debug\PhoneBookApp.exe
+C:\Users\matea\Documents\DUMP_internship\Internship-3-OOP\PhoneBookApp\PhoneBookApp\obj\Debug\PhoneBookApp.pdb
