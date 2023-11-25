@@ -46,7 +46,7 @@ namespace PhoneBookApp
                 {
                     case "1":
                         Console.Clear();
-                        Console.WriteLine("Option 1");
+                        PrintAllContacts();
                         break;
                     case "2":
                         Console.Clear();
@@ -111,6 +111,18 @@ namespace PhoneBookApp
                         break;
                 }
             }
+        }
+        static void PrintAllContacts()
+        {
+            Console.WriteLine("----SVI KONTAKTI----");
+            foreach (var contact in phoneBook.Keys)
+            {
+                Console.WriteLine($"{contact.FirstName} {contact.LastName} - {contact.PhoneNumber} - {contact.Prefference}");
+            }
+            Console.WriteLine();
+            Console.WriteLine("Pritisnite bilo koju tipku za povratak na glavni meni: ");
+            Console.ReadKey();
+            Console.Clear();
         }
     }
 }
