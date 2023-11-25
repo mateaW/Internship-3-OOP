@@ -29,8 +29,11 @@ namespace PhoneBookApp
             phoneBook.Add(contact6, new List<Call>());
             phoneBook.Add(contact7, new List<Call>());
 
+            
+
             while (true)
             {
+                Console.Clear();
                 Console.WriteLine("----MENU----");
                 Console.WriteLine("1 - Ispis svih kontakata");
                 Console.WriteLine("2 - Dodavanje novih kontakata u imenik");
@@ -50,7 +53,7 @@ namespace PhoneBookApp
                         break;
                     case "2":
                         Console.Clear();
-                        Console.WriteLine("Option 2");
+                        AddNewContacts();
                         break;
                     case "3":
                         Console.Clear();
@@ -62,8 +65,7 @@ namespace PhoneBookApp
                         break;
                     case "5":
                         Console.Clear();
-                        SubMenu();
-                        
+                        SubMenu();                
                         break;
                     case "6":
                         Console.Clear();
@@ -71,7 +73,7 @@ namespace PhoneBookApp
                         break;
                     case "7":
                         Console.Clear();
-                        Console.WriteLine("Izlaz iz aplikacije..");
+                        Console.WriteLine("Izlaz iz aplikacije...");
                         Thread.Sleep(1000);
                         return;
                     default:
@@ -120,9 +122,117 @@ namespace PhoneBookApp
                 Console.WriteLine($"{contact.FirstName} {contact.LastName} - {contact.PhoneNumber} - {contact.Prefference}");
             }
             Console.WriteLine();
+            Console.WriteLine("Pritisnite bilo koju tipku za povratak na glavni meni...");
+            Console.ReadKey();
+        }
+
+        static void AddNewContacts()
+        {
+            string firstName = "";
+            string lastName = "";
+            string phoneNumber = "";
+            Prefference preff = new Prefference();
+
+            Console.WriteLine("----UNOS NOVOG KONTAKTA----");
+
+            while (true)
+            {
+                Console.Write("Unesite ime novog kontakta: ");
+                firstName = Console.ReadLine();
+
+                if (firstName == "")
+                {
+                    Console.WriteLine("Ime ne smije biti prazno.");
+                    continue;
+                }
+
+                Console.Write("Unesite prezime novog kontakta: ");
+                lastName = Console.ReadLine(); // prezime moze biti prazno
+
+                bool contactExists = phoneBook.Keys.Any(k => k.FirstName.Equals(firstName, StringComparison.OrdinalIgnoreCase) && k.LastName.Equals(lastName, StringComparison.OrdinalIgnoreCase));
+
+
+                if (contactExists)
+                {
+                    Console.WriteLine("Kontakt s istim imenom i prezimenom već postoji.");
+                    continue;
+                }
+
+                break;
+            }
+
+            while (true)
+            {
+                Console.WriteLine("Unesite broj mobitela: ");
+                phoneNumber = Console.ReadLine();
+
+                if (phoneBook.Keys.Any(contact => contact.PhoneNumber.Equals(phoneNumber, StringComparison.OrdinalIgnoreCase)))
+                {
+                    Console.WriteLine("Kontakt s istim brojem mobitela već postoji.");
+                    continue;
+                }
+
+                if (phoneNumber == "")
+                {
+                    Console.WriteLine("Broj mobitela ne smije biti prazan.");
+                    continue;
+                }
+
+                break;
+            }
+
+            while (true)
+            {
+                Console.WriteLine("Odaberite broj za preferencu kontakta: ");
+                Console.WriteLine("1. Favorit");
+                Console.WriteLine("2. Normalan");
+                Console.WriteLine("3. Blokiran");
+
+                string option = Console.ReadLine();
+
+                switch (option)
+                {
+                    case "1":
+                        preff = Prefference.Favourite;
+                        break;
+                    case "2":
+                        preff = Prefference.Normal;
+                        break;
+                    case "3":
+                        preff = Prefference.Blocked;
+                        break;
+                    default:
+                        Console.WriteLine("Pogrešan unos za preferencu. Upišite brojeve 1-3.");
+                        continue;
+                }
+                break;
+            }
+            while (true)
+            {
+                Console.WriteLine($"Potvrđujete li unos kontakta {firstName} {lastName} (da/ne)?");
+                string conf = Console.ReadLine();
+
+                if (conf.ToLower() == "da")
+                {
+                    Contact newContact = new Contact(firstName, lastName, phoneNumber, preff);
+                    phoneBook.Add(newContact, new List<Call>());
+
+                    Console.WriteLine($"Novi kontakt {firstName} {lastName} dodan u imenik.");
+                }
+                else if (conf.ToLower() == "ne")
+                {
+                    return;
+                }
+                else
+                {
+                    Console.WriteLine("Pogrešan unos.");
+                    continue;
+                }
+                break;
+            }
+            Console.WriteLine();
             Console.WriteLine("Pritisnite bilo koju tipku za povratak na glavni meni: ");
             Console.ReadKey();
-            Console.Clear();
         }
     }
 }
