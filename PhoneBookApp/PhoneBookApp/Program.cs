@@ -62,7 +62,7 @@ namespace PhoneBookApp
                         break;
                     case "4":
                         Console.Clear();
-                        Console.WriteLine("Option 4");
+                        EditPrefferences();
                         break;
                     case "5":
                         Console.Clear();
@@ -70,7 +70,7 @@ namespace PhoneBookApp
                         break;
                     case "6":
                         Console.Clear();
-                        Console.WriteLine("Option 6");
+                        PrintAllCalls();
                         break;
                     case "7":
                         Console.Clear();
@@ -100,11 +100,11 @@ namespace PhoneBookApp
                 {
                     case "1":
                         Console.Clear();
-                        Console.WriteLine("submenu option 1");
+                        PrintAllContactCalls();
                         break;
                     case "2":
                         Console.Clear();
-                        Console.WriteLine("submenu option 2");
+                        MakeNewCall();
                         break;
                     case "3":
                         Console.Clear();
@@ -292,6 +292,23 @@ namespace PhoneBookApp
             Console.WriteLine();
             Console.WriteLine("Pritisnite bilo koju tipku za povratak na glavni meni: ");
             Console.ReadKey();
+        }
+        static void EditPrefferences()
+        {
+
+        }
+        static void PrintAllCalls()
+        {
+
+        }
+
+        static void PrintAllContactCalls()
+        {
+
+        }
+        static void MakeNewCall()
+        {
+
         }
     }
 }
