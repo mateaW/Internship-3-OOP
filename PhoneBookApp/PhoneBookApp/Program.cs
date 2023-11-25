@@ -31,7 +31,7 @@ namespace PhoneBookApp
 
             while (true)
             {
-                Console.WriteLine("MENU: ");
+                Console.WriteLine("----MENU----");
                 Console.WriteLine("1 - Ispis svih kontakata");
                 Console.WriteLine("2 - Dodavanje novih kontakata u imenik");
                 Console.WriteLine("3 - Brisanje kontakata iz imenika");
@@ -62,7 +62,8 @@ namespace PhoneBookApp
                         break;
                     case "5":
                         Console.Clear();
-                        Console.WriteLine("Option 5");
+                        SubMenu();
+                        
                         break;
                     case "6":
                         Console.Clear();
@@ -76,6 +77,37 @@ namespace PhoneBookApp
                     default:
                         Console.Clear();
                         Console.WriteLine("Pogrešan unos. Upišite brojeve 1-7.");
+                        break;
+                }
+            }
+        }
+
+        static void SubMenu()
+        {
+            while (true)
+            {
+                Console.WriteLine("----SUBMENU----");
+                Console.WriteLine("1 - Ispis svih poziva sa određenim kontaktom, vremenski poredan");
+                Console.WriteLine("2 - Kreiranje novog poziva");
+                Console.WriteLine("3 - Povratak na glavni izbornik");
+
+                string option = Console.ReadLine();
+
+                switch (option)
+                {
+                    case "1":
+                        Console.Clear();
+                        Console.WriteLine("submenu option 1");
+                        break;
+                    case "2":
+                        Console.Clear();
+                        Console.WriteLine("submenu option 2");
+                        break;
+                    case "3":
+                        Console.Clear();
+                        return;
+                    default:
+                        Console.WriteLine("Pogrešan unos. Upišite brojeve 1-3.");
                         break;
                 }
             }
