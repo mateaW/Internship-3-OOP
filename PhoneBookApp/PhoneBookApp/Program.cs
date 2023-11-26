@@ -12,49 +12,46 @@ namespace PhoneBookApp
     public class Program
     {
         static Random random = new Random();
-        static Dictionary<Contact, List<Call>> phoneBook = new Dictionary<Contact, List<Call>>();
+        static Dictionary<Contact, List<Call>> phoneBook = new Dictionary<Contact, List<Call>>()
+        {
+            {
+                new Contact("Marta", "Katić", "091 100 4429", Prefference.Blocked), new List<Call>()
+                {
+                new Call(new DateTime(2023, 04, 08, 12, 22, 00), Status.Finished)
+                }
+            },
+            {
+                new Contact("Marin", "Cecić", "091 234 5678", Prefference.Favourite), new List<Call>()
+                {
+                    new Call(new DateTime(2023, 11, 25, 12, 30, 00), Status.Finished),
+                    new Call(new DateTime(2023, 11, 20, 10, 12, 05), Status.Finished)
+                }
+            },
+            {
+                new Contact("Marta", "Batinić", "095 539 7809", Prefference.Normal), new List<Call>()
+                {
+                    new Call(new DateTime(2023, 10, 05, 16, 22, 50), Status.Missed)
+                }
+            },
+            {
+                new Contact("Rina", "Miočić", "091 329 1312", Prefference.Normal), new List<Call>()
+                {
+                    new Call(new DateTime(2023, 11, 02, 20, 34, 20, 09), Status.Finished),
+                    new Call(new DateTime(2023, 11, 15, 22, 00, 45), Status.Finished),
+                    new Call(new DateTime(2023, 11, 16, 6, 17, 30), Status.Missed)
+                }
+            },
+            {
+                new Contact("Stipe", "Bilonić", "092 234 7799", Prefference.Favourite), new List<Call>()
+                {
+                    new Call(new DateTime(2023, 11, 01, 10, 08, 09), Status.Finished),
+                    new Call(new DateTime(2023, 08, 12, 17, 38, 49), Status.Finished)
+                }
+            }
+        };
+
         static void Main(string[] args)
         {
-            // prvi kontakt i svi pozivi s tim kontaktom
-            Contact contact1 = new Contact("Marin", "Cecić", "091 234 5678", Prefference.Favourite);
-            List<Call> calls1 = new List<Call>();
-            Call contact1call1 = new Call(new DateTime(2023, 11, 25, 12, 30, 00), Status.Finished);
-            Call contact1call2 = new Call(new DateTime(2023, 11, 20, 10, 12, 05), Status.Finished);
-            calls1.Add(contact1call1); 
-            calls1.Add(contact1call2);
-            phoneBook.Add(contact1, calls1);
-            //
-
-            Contact contact2 = new Contact("Marta", "Batinić", "095 539 7809", Prefference.Normal);
-            List<Call> calls2 = new List<Call>();
-            Call contact2call1 = new Call(new DateTime(2023, 10, 05, 16, 22, 50), Status.Missed);
-            calls2.Add(contact2call1);
-            phoneBook.Add(contact2, calls2);
-
-            Contact contact3 = new Contact("Rina", "Miočić", "091 329 1312", Prefference.Normal);
-            List<Call> calls3 = new List<Call>();
-            Call contact3call1 = new Call(new DateTime(2023, 11, 02, 20, 34, 20, 09), Status.Finished);
-            Call contact3call2 = new Call(new DateTime(2023, 11, 15, 22, 00, 45), Status.Finished);
-            Call contact3call3 = new Call(new DateTime(2023, 11, 16, 6, 17, 30), Status.Missed);
-            calls3.Add(contact3call1);
-            calls3.Add(contact3call2);
-            calls3.Add(contact3call3);
-            phoneBook.Add(contact3, calls3);
-
-            Contact contact4 = new Contact("Stipe", "Bilonić", "092 234 7799", Prefference.Favourite);
-            List<Call> calls4 = new List<Call>();
-            Call contact4call1 = new Call(new DateTime(2023, 11, 01, 10, 08, 09), Status.Finished);
-            Call contact4call2 = new Call(new DateTime(2023, 08, 12, 17, 38, 49), Status.Finished);
-            calls4.Add(contact4call1);
-            calls4.Add(contact4call2);
-            phoneBook.Add(contact4, calls4);
-
-            Contact contact5 = new Contact("Marta", "Katić", "091 100 4429", Prefference.Blocked);
-            List<Call> calls5 = new List<Call>();
-            Call contact5call1 = new Call(new DateTime(2023, 04, 08, 12, 22, 00), Status.Finished);
-            calls5.Add(contact5call1);
-            phoneBook.Add(contact5, calls5);
-
             while (true)
             {
                 Console.Clear();
