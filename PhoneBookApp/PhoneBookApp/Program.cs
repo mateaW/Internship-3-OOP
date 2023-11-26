@@ -513,7 +513,21 @@ namespace PhoneBookApp
         }
         static void PrintAllCalls()
         {
+            Console.WriteLine("-----SVI POZIVI-----");
+            Console.WriteLine();
 
+            foreach (var contact in phoneBook.Keys)
+            {
+                Console.WriteLine($"Kontakt: {contact.FirstName} {contact.LastName}");
+                foreach (var poziv in phoneBook[contact])
+                {
+                    Console.WriteLine($"Vrijeme poziva: {poziv.CallTime}, Status: {poziv.Status}");
+                }
+                Console.WriteLine();
+            }
+            Console.WriteLine();
+            Console.WriteLine("Pritisnite bilo koju tipku za povratak na submenu... ");
+            Console.ReadKey();
         }
     }
 }
