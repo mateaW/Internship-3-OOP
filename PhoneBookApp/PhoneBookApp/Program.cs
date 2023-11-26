@@ -111,6 +111,7 @@ namespace PhoneBookApp
         {
             while (true)
             {
+                Console.Clear();
                 Console.WriteLine("----SUBMENU----");
                 Console.WriteLine("1 - Ispis svih poziva sa određenim kontaktom, vremenski poredan");
                 Console.WriteLine("2 - Kreiranje novog poziva");
@@ -398,16 +399,56 @@ namespace PhoneBookApp
             Console.WriteLine("Pritisnite bilo koju tipku za povratak na glavni meni... ");
             Console.ReadKey();
         }
-        static void PrintAllCalls()
-        {
-
-        }
 
         static void PrintAllContactCalls()
         {
+            Console.WriteLine("----ISPIS SVIH POZIVA SA KONTAKTOM----");
+            Console.WriteLine();
 
+            for (int i = 0; i < phoneBook.Count(); i++)
+            {
+                Contact contact = phoneBook.Keys.ElementAt(i);
+                Console.WriteLine($"{i + 1}. {contact.FirstName} {contact.LastName} - {contact.PhoneNumber} - {contact.Prefference}");
+            }
+
+            Console.WriteLine();
+
+            Console.Write("Unesite ime kontakta čiji popis poziva želite vidjeti: ");
+            string firstName = Console.ReadLine();
+
+            Console.Write("Unesite prezime kontakta čiji popis poziva želite vidjeti: ");
+            string lastName = Console.ReadLine();
+
+            Console.WriteLine();
+
+            Contact chosenContact = phoneBook.Keys.FirstOrDefault(k => k.FirstName.Equals(firstName, StringComparison.OrdinalIgnoreCase) && k.LastName.Equals(lastName, StringComparison.OrdinalIgnoreCase));
+
+            if (chosenContact != null)
+            {
+                List<Call> chosenContactCalls = phoneBook[chosenContact];
+
+                chosenContactCalls = chosenContactCalls.OrderByDescending(p => p.CallTime).ToList();
+
+                Console.WriteLine($"POZIVI SA KONTAKTOM: {chosenContact.FirstName} {chosenContact.LastName}: ");
+                foreach (var poziv in chosenContactCalls)
+                {
+                    Console.WriteLine($"Vrijeme poziva: {poziv.CallTime}, Status: {poziv.Status}");
+                }
+                Console.WriteLine();
+            }
+            else
+            {
+                Console.WriteLine("Kontakt nije pronađen.");
+            }
+            Console.WriteLine();
+            Console.WriteLine("Pritisnite bilo koju tipku za povratak na submenu... ");
+            Console.ReadKey();
         }
         static void MakeNewCall()
+        {
+
+        }
+        static void PrintAllCalls()
         {
 
         }
