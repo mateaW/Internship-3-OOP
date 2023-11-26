@@ -11,6 +11,7 @@ namespace PhoneBookApp
 {
     public class Program
     {
+        static Random random = new Random();
         static Dictionary<Contact, List<Call>> phoneBook = new Dictionary<Contact, List<Call>>();
         static void Main(string[] args)
         {
@@ -32,7 +33,7 @@ namespace PhoneBookApp
 
             Contact contact3 = new Contact("Rina", "Miočić", "091 329 1312", Prefference.Normal);
             List<Call> calls3 = new List<Call>();
-            Call contact3call1 = new Call(DateTime.Now, Status.InProgress);
+            Call contact3call1 = new Call(new DateTime(2023, 11, 02, 20, 34, 20, 09), Status.Finished);
             Call contact3call2 = new Call(new DateTime(2023, 11, 15, 22, 00, 45), Status.Finished);
             Call contact3call3 = new Call(new DateTime(2023, 11, 16, 6, 17, 30), Status.Missed);
             calls3.Add(contact3call1);
@@ -42,7 +43,7 @@ namespace PhoneBookApp
 
             Contact contact4 = new Contact("Stipe", "Bilonić", "092 234 7799", Prefference.Favourite);
             List<Call> calls4 = new List<Call>();
-            Call contact4call1 = new Call(DateTime.Now.AddMinutes(-2), Status.InProgress);
+            Call contact4call1 = new Call(new DateTime(2023, 11, 01, 10, 08, 09), Status.Finished);
             Call contact4call2 = new Call(new DateTime(2023, 08, 12, 17, 38, 49), Status.Finished);
             calls4.Add(contact4call1);
             calls4.Add(contact4call2);
@@ -446,7 +447,69 @@ namespace PhoneBookApp
         }
         static void MakeNewCall()
         {
+            Console.WriteLine("----KREIRANJE NOVOG POZIVA----");
+            Console.WriteLine();
 
+            for (int i = 0; i < phoneBook.Count(); i++)
+            {
+                Contact contact = phoneBook.Keys.ElementAt(i);
+                Console.WriteLine($"{i + 1}. {contact.FirstName} {contact.LastName} - {contact.PhoneNumber} - {contact.Prefference}");
+            }
+            Console.WriteLine();
+
+            Console.Write("Unesite ime kontakta kojeg želite pozvati: ");
+            string firstName = Console.ReadLine();
+
+            Console.Write("Unesite prezime kontakta kojeg želite pozvati: ");
+            string lastName = Console.ReadLine();
+
+            Contact contactToCall = phoneBook.Keys.FirstOrDefault(k => k.FirstName.Equals(firstName, StringComparison.OrdinalIgnoreCase) && k.LastName.Equals(lastName, StringComparison.OrdinalIgnoreCase));
+
+            if (contactToCall != null)
+            {
+                if (!phoneBook.Values.Any(pozivi => pozivi.Any(p => p.Status == Status.InProgress))) //postoji li vec neki poziv u tijeku
+                {
+                    if (contactToCall.Prefference != Prefference.Blocked) // je li kontakt blokiran
+                    {
+                        Console.Clear();
+                        Console.WriteLine("Pozivanje... ");
+                        System.Threading.Thread.Sleep(random.Next(1000, 10000)); // čekamo random vrijeme da se korisnik javi
+                        var answerToCall = random.Next(1, 3); // 1 ako je poziv odbijen, 2 ako se korisnik javio
+                        if (answerToCall == 2)
+                        {
+                            int duration = random.Next(1, 21); //random trajanje poziva
+                            DateTime endTime = DateTime.Now.AddSeconds(duration); 
+                            Console.WriteLine($"Poziv uspostavljen s kontaktom {contactToCall.FirstName} {contactToCall.LastName}.");
+                            Console.WriteLine("Poziv...");
+                            Thread.Sleep(duration*1000); // cekamo dok traje poziv
+                            Console.WriteLine($"Kraj poziva: {endTime}. Trajanje: {duration} sekundi. ");
+                            Call newCall = new Call(DateTime.Now, Status.Finished);
+                            phoneBook[contactToCall].Add(newCall);
+                        }
+                        else
+                        {
+                            Console.WriteLine($"Poziv nije uspostavljen. Kontakt {contactToCall.FirstName} {contactToCall.LastName} je odbio poziv.");
+                            Call newCall = new Call(DateTime.Now, Status.Missed);
+                            phoneBook[contactToCall].Add(newCall);
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Nije moguće uspostaviti poziv s blokiranim kontaktom.");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Već postoji poziv u tijeku. Molimo pričekajte da završi.");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Kontakt nije pronađen.");
+            }
+            Console.WriteLine();
+            Console.WriteLine("Pritisnite bilo koju tipku za povratak na submenu... ");
+            Console.ReadKey();
         }
         static void PrintAllCalls()
         {
