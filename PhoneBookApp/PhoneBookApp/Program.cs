@@ -295,7 +295,86 @@ namespace PhoneBookApp
         }
         static void EditPrefferences()
         {
+            Console.WriteLine("----PROMJENA PREFERENCI KONTAKTA----");
 
+            for (int i = 0; i < phoneBook.Count(); i++)
+            {
+                Contact contact = phoneBook.Keys.ElementAt(i);
+                Console.WriteLine($"{i + 1}. {contact.FirstName} {contact.LastName} - {contact.PhoneNumber} - {contact.Prefference}");
+            }
+
+            Console.WriteLine();
+
+            Console.Write("Unesite ime kontakta kojem želite promijeniti preferencu: ");
+            string firstName = Console.ReadLine();
+
+            Console.Write("Unesite prezime kontakta kojem želite promijeniti preferencu: ");
+            string lastName = Console.ReadLine();
+
+            Contact contactToChangePrefference = phoneBook.Keys.FirstOrDefault(k => k.FirstName.Equals(firstName, StringComparison.OrdinalIgnoreCase) &&
+            k.LastName.Equals(lastName, StringComparison.OrdinalIgnoreCase));
+
+            Prefference preff;
+
+            if(contactToChangePrefference != null)
+            {
+                Console.WriteLine($"Trenutna preferenca kontakta: {contactToChangePrefference.Prefference}");
+
+                while (true)
+                {
+                    Console.WriteLine("Odaberite broj ispred nove preference kontakta: ");
+                    Console.WriteLine("1. Favorit");
+                    Console.WriteLine("2. Normalan");
+                    Console.WriteLine("3. Blokiran");
+
+                    string option = Console.ReadLine();
+
+                    switch (option)
+                    {
+                        case "1":
+                            preff = Prefference.Favourite;
+                            break;
+                        case "2":
+                            preff = Prefference.Normal;
+                            break;
+                        case "3":
+                            preff = Prefference.Blocked;
+                            break;
+                        default:
+                            Console.WriteLine("Pogrešan unos za preferencu. Upišite brojeve 1-3.");
+                            continue;
+                    }
+                    break;
+                }
+                while (true)
+                {
+                    Console.WriteLine($"Potvrđujete li promjenu preference kontakta {firstName} {lastName} (da/ne)?");
+                    string conf = Console.ReadLine();
+
+                    if (conf.ToLower() == "da")
+                    {
+                        contactToChangePrefference.Prefference = preff;
+                        Console.WriteLine($"Preferenca kontakta {firstName} {lastName} uspješno promijenjena.");
+                    }
+                    else if (conf.ToLower() == "ne")
+                    {
+                        return;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Pogrešan unos.");
+                        continue;
+                    }
+                    break;
+                }
+            }
+            else
+            {
+                Console.WriteLine("Kontakt nije pronađen.");
+            }
+            Console.WriteLine();
+            Console.WriteLine("Pritisnite bilo koju tipku za povratak na glavni meni: ");
+            Console.ReadKey();
         }
         static void PrintAllCalls()
         {
